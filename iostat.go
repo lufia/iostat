@@ -12,6 +12,6 @@ type DriveStats struct {
 	BytesWritten int64
 	NumReads     int64
 	NumWrites    int64
-	ReadTime     time.Duration
-	WriteTime    time.Duration
+	ReadLatency  time.Duration
+	WriteLatency time.Duration
 }
