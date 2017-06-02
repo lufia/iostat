@@ -19,15 +19,17 @@ func ReadDriveStats() ([]*DriveStats, error) {
 	stats := make([]*DriveStats, n)
 	for i := 0; i < int(n); i++ {
 		stats[i] = &DriveStats{
-			Name:         C.GoString(&buf[i].name[0]),
-			Size:         int64(buf[i].size),
-			BlockSize:    int64(buf[i].blocksize),
-			BytesRead:    int64(buf[i].read),
-			BytesWritten: int64(buf[i].written),
-			NumReads:     int64(buf[i].nread),
-			NumWrites:    int64(buf[i].nwrite),
-			ReadLatency:  time.Duration(buf[i].readtime),
-			WriteLatency: time.Duration(buf[i].writetime),
+			Name:           C.GoString(&buf[i].name[0]),
+			Size:           int64(buf[i].size),
+			BlockSize:      int64(buf[i].blocksize),
+			BytesRead:      int64(buf[i].read),
+			BytesWritten:   int64(buf[i].written),
+			NumRead:        int64(buf[i].nread),
+			NumWrite:       int64(buf[i].nwrite),
+			TotalReadTime:  time.Duration(buf[i].readtime),
+			TotalWriteTime: time.Duration(buf[i].writetime),
+			ReadLatency:    time.Duration(buf[i].readlat),
+			WriteLatency:   time.Duration(buf[i].writelat),
 		}
 	}
 	return stats, nil

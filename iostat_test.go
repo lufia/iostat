@@ -28,10 +28,12 @@ func TestReadDriveStats(t *testing.T) {
 			t.Logf("BlockSize = %d\n", stat.BlockSize)
 			t.Logf("BytesRead = %d\n", stat.BytesRead)
 			t.Logf("BytesWritten = %d\n", stat.BytesWritten)
-			t.Logf("NumReads = %d\n", stat.NumReads)
-			t.Logf("NumWrites = %d\n", stat.NumWrites)
-			t.Logf("ReadLatency = %d\n", stat.ReadLatency)
-			t.Logf("WriteLatency = %d\n", stat.WriteLatency)
+			t.Logf("NumRead = %d\n", stat.NumRead)
+			t.Logf("NumWrite = %d\n", stat.NumWrite)
+			t.Logf("TotalReadTime = %v\n", stat.TotalReadTime)
+			t.Logf("TotalWriteTime = %v\n", stat.TotalWriteTime)
+			t.Logf("ReadLatency = %v\n", stat.ReadLatency)
+			t.Logf("WriteLatency = %v\n", stat.WriteLatency)
 		})
 	}
 }

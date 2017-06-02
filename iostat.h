@@ -16,6 +16,8 @@ struct DriveStats {
 	int64_t nwrite;
 	int64_t readtime;
 	int64_t writetime;
+	int64_t readlat;
+	int64_t writelat;
 };
 
 extern int readdrivestat(DriveStats a[], int n);
