@@ -81,12 +81,25 @@ getdrivestat(io_registry_entry_t d, DriveStats *stat)
 	return 1;
 }
 
+static struct {
+	char *key;
+	size_t off;
+} statstab[] = {
+	{kIOBlockStorageDriverStatisticsBytesReadKey, offsetof(DriveStats, read)},
+	{kIOBlockStorageDriverStatisticsBytesWrittenKey, offsetof(DriveStats, written)},
+	{kIOBlockStorageDriverStatisticsReadsKey, offsetof(DriveStats, nread)},
+	{kIOBlockStorageDriverStatisticsWritesKey, offsetof(DriveStats, nwrite)},
+	{kIOBlockStorageDriverStatisticsLatentReadTimeKey, offsetof(DriveStats, readtime)},
+	{kIOBlockStorageDriverStatisticsLatentWriteTimeKey, offsetof(DriveStats, writetime)},
+};
+
 static int
 fillstat(io_registry_entry_t d, DriveStats *stat)
 {
 	CFDictionaryRef props, v;
 	CFNumberRef num;
 	kern_return_t status;
+	typeof(statstab[0]) *bp, *ep;
 
 	status = IORegistryEntryCreateCFProperties(d, (CFMutableDictionaryRef *)&props, kCFAllocatorDefault, kNilOptions);
 	if(status != KERN_SUCCESS)
@@ -97,26 +110,16 @@ fillstat(io_registry_entry_t d, DriveStats *stat)
 		return -1;
 	}
 
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsBytesReadKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->read);
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsBytesWrittenKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->written);
+	ep = &statstab[sizeof(statstab)/sizeof(statstab[0])];
+	for(bp = &statstab[0]; bp < ep; bp++){
+		CFStringRef s;
 
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsReadsKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nread);
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsWritesKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nwrite);
-
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsLatentReadTimeKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->readtime);
-	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsLatentWriteTimeKey));
-	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->writetime);
+		s = CFStringCreateWithCString(kCFAllocatorDefault, bp->key, CFStringGetSystemEncoding());
+		num = (CFNumberRef)CFDictionaryGetValue(v, s);
+		if(num)
+			CFNumberGetValue(num, kCFNumberSInt64Type, ((char*)stat)+bp->off);
+		CFRelease(s);
+	}
 
 	CFRelease(props);
 	return 0;
