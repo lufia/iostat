@@ -3,12 +3,12 @@
 package iostat
 
 // #cgo LDFLAGS: -framework CoreFoundation -framework IOKit
-// #include <string.h>
+// #include <stdint.h>
 // #include "iostat.h"
 import "C"
 
 func ReadDriveStats() ([]*DriveStats, error) {
-	buf := make([]C.struct_DriveStats, C.NDRIVE)
+	var buf [C.NDRIVE]C.DriveStats
 	n, err := C.readdrivestat(&buf[0], C.int(len(buf)))
 	if err != nil {
 		return nil, err

@@ -1,22 +1,13 @@
-#define IOKIT	1	/* to get io_name_t in device_types.h */
+#include <stdint.h>
+#include "iostat.h"
 
-#include <sys/param.h>
-#include <sys/sysctl.h>
+#define IOKIT	1	/* to get io_name_t in device_types.h */
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 #include <IOKit/storage/IOBlockStorageDriver.h>
 #include <IOKit/storage/IOMedia.h>
 #include <IOKit/IOBSD.h>
-
-#include <err.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#include "iostat.h"
 
 static int getdrivestat(io_registry_entry_t d, DriveStats *stat);
 static int fillstat(io_registry_entry_t d, DriveStats *stat);
@@ -115,10 +106,10 @@ fillstat(io_registry_entry_t d, DriveStats *stat)
 
 	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsReadsKey));
 	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nreads);
+		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nread);
 	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsWritesKey));
 	if(num)
-		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nwrites);
+		CFNumberGetValue(num, kCFNumberSInt64Type, &stat->nwrite);
 
 	num = (CFNumberRef)CFDictionaryGetValue(v, CFSTR(kIOBlockStorageDriverStatisticsLatentReadTimeKey));
 	if(num)
