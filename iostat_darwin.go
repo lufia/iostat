@@ -4,7 +4,7 @@ package iostat
 
 // #cgo LDFLAGS: -framework CoreFoundation -framework IOKit
 // #include <string.h>
-// #include "iostat.h"
+// #include "iostat_darwin.h"
 import "C"
 
 func ReadDriveStats() ([]*DriveStats, error) {

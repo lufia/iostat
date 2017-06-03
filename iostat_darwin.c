@@ -16,7 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "iostat.h"
+#include "iostat_darwin.h"
 
 static int getdrivestat(io_registry_entry_t d, DriveStats *stat);
 static int fillstat(io_registry_entry_t d, DriveStats *stat);
