@@ -7,6 +7,7 @@ package iostat
 // #include "iostat_darwin.h"
 import "C"
 
+// ReadDriveStats returns statictics of each of the drives.
 func ReadDriveStats() ([]*DriveStats, error) {
 	buf := make([]C.struct_DriveStats, C.NDRIVE)
 	n, err := C.readdrivestat(&buf[0], C.int(len(buf)))

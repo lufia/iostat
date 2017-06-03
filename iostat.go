@@ -1,8 +1,9 @@
-// Package iostat
+// Package iostat presents I/O statistics.
 package iostat
 
 import "time"
 
+// DriveStats represents I/O statistics of a drive.
 type DriveStats struct {
 	Name      string // drive name
 	Size      int64  // total drive size in bytes
