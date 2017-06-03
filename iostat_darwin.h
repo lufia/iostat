@@ -5,18 +5,19 @@ enum {
 	NAMELEN = 31
 };
 
-typedef long long vlong;
 struct DriveStats {
 	char name[NAMELEN+1];
-	vlong size;
-	vlong blocksize;
+	int64_t size;
+	int64_t blocksize;
 
-	vlong read;
-	vlong written;
-	vlong nreads;
-	vlong nwrites;
-	vlong readtime;
-	vlong writetime;
+	int64_t read;
+	int64_t written;
+	int64_t nread;
+	int64_t nwrite;
+	int64_t readtime;
+	int64_t writetime;
+	int64_t readlat;
+	int64_t writelat;
 };
 
 extern int readdrivestat(DriveStats a[], int n);

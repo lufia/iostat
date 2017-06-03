@@ -9,10 +9,12 @@ type DriveStats struct {
 	Size      int64  // total drive size in bytes
 	BlockSize int64  // block size in bytes
 
-	BytesRead    int64
-	BytesWritten int64
-	NumReads     int64
-	NumWrites    int64
-	ReadTime     time.Duration
-	WriteTime    time.Duration
+	BytesRead      int64
+	BytesWritten   int64
+	NumRead        int64
+	NumWrite       int64
+	TotalReadTime  time.Duration
+	TotalWriteTime time.Duration
+	ReadLatency    time.Duration
+	WriteLatency   time.Duration
 }
