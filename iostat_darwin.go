@@ -36,3 +36,18 @@ func ReadDriveStats() ([]*DriveStats, error) {
 	}
 	return stats, nil
 }
+
+// ReadCPUStats returns statistics of CPU usage.
+func ReadCPUStats() (*CPUStats, error) {
+	var cpu C.CPUStats
+	_, err := C.readcpustat(&cpu)
+	if err != nil {
+		return nil, err
+	}
+	return &CPUStats{
+		User: uint64(cpu.user),
+		Nice: uint64(cpu.nice),
+		Sys:  uint64(cpu.sys),
+		Idle: uint64(cpu.idle),
+	}, nil
+}

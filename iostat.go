@@ -18,3 +18,12 @@ type DriveStats struct {
 	ReadLatency    time.Duration
 	WriteLatency   time.Duration
 }
+
+// CPUStats represents CPU statistics.
+type CPUStats struct {
+	// consumed cpu ticks for each.
+	User uint64
+	Nice uint64
+	Sys  uint64
+	Idle uint64
+}

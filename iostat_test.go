@@ -37,3 +37,20 @@ func TestReadDriveStats(t *testing.T) {
 		})
 	}
 }
+
+func TestReadCPUStats(t *testing.T) {
+	cpu, err := ReadCPUStats()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cpu.User == 0 {
+		t.Errorf("User = %d; want >0", cpu.User)
+	}
+	if cpu.Sys == 0 {
+		t.Errorf("Sys = %d; want >0", cpu.Sys)
+	}
+	t.Logf("User = %d\n", cpu.User)
+	t.Logf("Nice = %d\n", cpu.Nice)
+	t.Logf("Sys = %d\n", cpu.Sys)
+	t.Logf("Idle = %d\n", cpu.Idle)
+}

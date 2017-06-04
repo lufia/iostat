@@ -10,3 +10,8 @@ import (
 func ReadDriveStats() ([]*DriveStats, error) {
 	return nil, errors.New("not implement")
 }
+
+// ReadCPUStats returns statistics of CPU usage.
+func ReadCPUStats() (*CPUStats, error) {
+	return nil, errors.New("not implement")
+}
