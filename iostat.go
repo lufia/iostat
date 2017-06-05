@@ -27,3 +27,11 @@ type CPUStats struct {
 	Sys  uint64
 	Idle uint64
 }
+
+// LoadAvg represents load averages of the system.
+type LoadAvg struct {
+	// load averages
+	Load1  float64 // over past 1 minute
+	Load5  float64 // over past 5 minutes
+	Load15 float64 // over past 15 minutes
+}
