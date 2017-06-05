@@ -6,7 +6,6 @@ package iostat
 // #include <stdint.h>
 // #include <CoreFoundation/CoreFoundation.h>
 // #include "iostat_darwin.h"
-// #include <stdlib.h>
 import "C"
 import (
 	"time"

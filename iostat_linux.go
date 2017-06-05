@@ -15,3 +15,8 @@ func ReadDriveStats() ([]*DriveStats, error) {
 func ReadCPUStats() (*CPUStats, error) {
 	return nil, errors.New("not implement")
 }
+
+// ReadLoadAvg returns load averages over periods of time.
+func ReadLoadAvg() (*LoadAvg, error) {
+	return nil, errors.New("not implement")
+}
