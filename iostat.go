@@ -1,4 +1,4 @@
-// Package iostat presents I/O statistics.
+// Package iostat presents I/O and CPU statistics.
 package iostat
 
 import "time"
