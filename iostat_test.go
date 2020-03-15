@@ -34,6 +34,8 @@ func TestReadDriveStats(t *testing.T) {
 			t.Logf("TotalWriteTime = %v\n", stat.TotalWriteTime)
 			t.Logf("ReadLatency = %v\n", stat.ReadLatency)
 			t.Logf("WriteLatency = %v\n", stat.WriteLatency)
+			t.Logf("ReadErrors = %v\n", stat.ReadErrors)
+			t.Logf("WriteErrors = %v\n", stat.WriteErrors)
 		})
 	}
 }

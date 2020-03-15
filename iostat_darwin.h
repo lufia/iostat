@@ -19,6 +19,8 @@ struct DriveStats {
 	int64_t writetime;
 	int64_t readlat;
 	int64_t writelat;
+	int64_t readerrs;
+	int64_t writeerrs;
 };
 
 struct CPUStats {
