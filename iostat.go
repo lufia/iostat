@@ -19,6 +19,8 @@ type DriveStats struct {
 	WriteLatency   time.Duration
 	ReadErrors     int64
 	WriteErrors    int64
+	ReadRetries    int64
+	WriteRetries   int64
 }
 
 // CPUStats represents CPU statistics.
