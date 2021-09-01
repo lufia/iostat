@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// ReadDriveStats returns statictics of each of the drives.
+// ReadDriveStats returns statistics of each of the drives.
 func ReadDriveStats() ([]*DriveStats, error) {
 	var buf [C.NDRIVE]C.DriveStats
 	_n, err := C.readdrivestat(&buf[0], C.int(len(buf)))
