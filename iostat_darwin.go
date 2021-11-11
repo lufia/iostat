@@ -16,7 +16,7 @@ import (
 // ReadDriveStats returns statistics of each of the drives.
 func ReadDriveStats() ([]*DriveStats, error) {
 	var buf [C.NDRIVE]C.DriveStats
-	_n, err := C.readdrivestat(&buf[0], C.int(len(buf)))
+	_n, err := C.lufia_iostat_v1_readdrivestat(&buf[0], C.int(len(buf)))
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +50,7 @@ func ReadDriveStats() ([]*DriveStats, error) {
 // ReadCPUStats returns statistics of CPU usage.
 func ReadCPUStats() (*CPUStats, error) {
 	var cpu C.CPUStats
-	_, err := C.readcpustat(&cpu)
+	_, err := C.lufia_iostat_v1_readcpustat(&cpu)
 	if err != nil {
 		return nil, err
 	}
