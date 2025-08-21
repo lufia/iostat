@@ -5,19 +5,8 @@ on:
     branches:
     - main
   pull_request:
-env:
-  GO111MODULE: on
 jobs:
   test:
-    strategy:
-      matrix:
-        os: ['macos-14', 'macos-13']
-        go: ['1.24.x', '1.23.x']
-    runs-on: ${{ matrix.os }}
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
-      with:
-        go-version: ${{ matrix.go }}
-    - run: go test -race -covermode=atomic -coverprofile=prof.out
-      shell: bash
+    uses: lufia/workflows/.github/workflows/go-test.yml@65fcecee196960dacd2ee5bd97a822d28e53411f # v0.7.1
+    with:
+      os-versions: '["macos-14", "macos-13"]'
