@@ -9,4 +9,4 @@ jobs:
   test:
     uses: lufia/workflows/.github/workflows/go-test.yml@77b285fcfe013c0e99b18ca23b0c9d575bd4327a # v0.8.0
     with:
-      os-versions: '["macos-14", "macos-13"]'
+      os-versions: '["macos-15", "macos-15-intel", "macos-14"]'
